@@ -18,7 +18,6 @@ outA (A a b) = i2 (a,b)
 outB NB = i1 ()
 outB (B a) = i2 a
 
-
 --catamorfismos
 cataA ga gb = ga . (id -|- cataA ga gb >< cataB ga gb) . outA
 cataB ga gb = gb . (id -|- cataA ga gb) . outB
@@ -43,7 +42,7 @@ genInt :: Gen(Int)
 genInt = choose (0,10)
 
 check n = a == f
-		where a = toInteger(length(showAlgae(generateAlgae n)))
-		      f = fib(toInteger(succ n))
+		where a = toInteger $ length(showAlgae(generateAlgae n))
+		      f = fib $ toInteger(succ n)
 
 test = quickCheck $ forAll genInt check

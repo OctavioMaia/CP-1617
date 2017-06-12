@@ -70,6 +70,6 @@ qSortB_tree = inordB_tree . (anaB_tree lsplitB_tree)
 -----------------6---------------
 dotB_tree :: Show a => B_tree a -> IO ExitCode
 dotB_tree = dotpict . bmap nothing (Just . show) . cB_tree2Exp
-cB_tree2Exp = cataB_tree (either nul rest)
+cB_tree2Exp = cataB_tree $ either nul rest
 	where nul = (const (Var "nil"))
 	      rest = ((uncurry Term) . split ((map p1) . p2) (cons . (split (p1) ((map p2).p2))))
