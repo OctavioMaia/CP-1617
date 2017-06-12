@@ -30,3 +30,33 @@ presort f = map p2 . sort . (map (fork f id ))
 
 pap :: Eq a => [(a, t)] -> a -> t
 pap m k = unJust (lookup k m) where unJust (Just a) = a
+
+permuta = mAna genePermuta
+genePermuta :: [a] -> IO (Either () (a, [a]))
+genePermuta [] = return (i1 ())
+genePermuta l  = do 
+           res <- getR l
+           return (i2 res)
+mAna :: (Monad m) => ([a] -> m (Either () (a, [a]))) -> [a] -> m [a]
+mAna g = mIn . (mRec(mAna g)) . g 
+mRec :: (Monad m) => ([a] -> m [a]) -> m (Either () (a, [a])) -> m (Either () (a, m [a]))
+mRec ana es = do 
+             x <- es
+             return ((id -|- id >< ana) x) 
+mIn :: (Monad m) => m (Either () (a, m [a])) -> m [a]
+mIn x = do 
+          s <- x
+          (either (return.nil)  mInAux) s
+          
+mInAux :: (Monad m) => (a, m [a]) -> m [a]
+mInAux (e,l) = do
+                lista <-l
+                return (cons (e,lista)) 
+               
+eliminatoria = cataLTree geneEliminatoria
+geneEliminatoria :: Either Equipa (Dist Equipa, Dist Equipa) -> Dist Equipa
+geneEliminatoria = either return aux 
+                                   where aux (a,b)  = do
+                                                  x <- a
+                                                  y <- b
+                                                  jogo (x,y)
