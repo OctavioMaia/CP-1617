@@ -859,9 +859,43 @@ permuta l = do {
           x <- permuta t; 
           return (h:x)
           }
+\end{code}
+
+De modo a ser possível testar a função \textbf{eliminatoria} utilizamos o exemplo fornecido, transformando-o numa \emph{LTree}.
+\\Assim sendo, após correr a mesma utilizando como argumento a \emph{LTree} previamente criada, pudemos verificar que as percentagens são identicas às do enunciado, provando assim que a função está corretamente implementada.
+
+\begin{code}
+eliminatoria (Leaf x) = return x
+eliminatoria (Fork (x,y)) = do { 
+                          v<- eliminatoria x ; 
+                          z<- eliminatoria y; 
+                          jogo(v,z)
+                        }
+
+listaEquipas = Fork(
+    Fork(
+      Fork(
+        Fork(Leaf("Sporting"),Leaf("Chaves")),
+        Fork(Leaf("P.Ferreira"),Leaf("Benfica"))
+        )
+      ,Fork(
+        Fork(Leaf("Porto"),Leaf("Braga")),
+        Fork(Leaf("Setubal"),Leaf("Feirense"))
+        )
+      )
+    ,Fork(
+      Fork(
+        Fork(Leaf("Guimaraes"),Leaf("Belenenses")),
+        Fork(Leaf("Moreirense"),Leaf("Maritimo"))
+        )
+      ,Fork(
+        Fork(Leaf("Arouca"),Leaf("Estoril")),
+        Fork(Leaf("Rio Ave"),Leaf("Nacional"))
+        )
+      )
+    )
 
 
-eliminatoria = undefined
 \end{code}
 
 %----------------- Fim do anexo cpm soluções propostas ------------------------%

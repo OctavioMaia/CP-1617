@@ -1409,8 +1409,101 @@ Caso ambos os valores sejam iguais passa no teste do \emph{QuickCheck}, iterando
 \\
 \>[B]{}\hsindent{11}{}\<[11]%
 \>[11]{}\mskip1.5mu\}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+De modo a ser possível testar a função \textbf{eliminatoria} utilizamos o exemplo fornecido, transformando-o numa \emph{LTree}.
+\\Assim sendo, após correr a mesma utilizando como argumento a \emph{LTree} previamente criada, pudemos verificar que as percentagens são identicas às do enunciado, provando assim que a função está corretamente implementada.
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{7}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{9}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{25}{@{}>{\hspre}c<{\hspost}@{}}%
+\column{25E}{@{}l@{}}%
+\column{27}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{eliminatoria}\;(\Conid{Leaf}\;\Varid{x})\mathrel{=}\Varid{return}\;\Varid{x}{}\<[E]%
+\\
+\>[B]{}\Varid{eliminatoria}\;(\Conid{Fork}\;(\Varid{x},\Varid{y}))\mathrel{=}\mathbf{do}\;\{\mskip1.5mu {}\<[E]%
+\\
+\>[B]{}\hsindent{27}{}\<[27]%
+\>[27]{}\Varid{v}\leftarrow \Varid{eliminatoria}\;\Varid{x};{}\<[E]%
+\\
+\>[B]{}\hsindent{27}{}\<[27]%
+\>[27]{}\Varid{z}\leftarrow \Varid{eliminatoria}\;\Varid{y};{}\<[E]%
+\\
+\>[B]{}\hsindent{27}{}\<[27]%
+\>[27]{}\Varid{jogo}\;(\Varid{v},\Varid{z}){}\<[E]%
+\\
+\>[B]{}\hsindent{25}{}\<[25]%
+\>[25]{}\mskip1.5mu\}{}\<[25E]%
 \\[\blanklineskip]%
-\>[B]{}\Varid{eliminatoria}\mathrel{=}\bot {}\<[E]%
+\>[B]{}\Varid{listaEquipas}\mathrel{=}\Conid{Fork}\;({}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\Conid{Fork}\;({}\<[E]%
+\\
+\>[5]{}\hsindent{2}{}\<[7]%
+\>[7]{}\Conid{Fork}\;({}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}\Conid{Fork}\;(\Conid{Leaf}\;(\text{\tt \char34 Sporting\char34}),\Conid{Leaf}\;(\text{\tt \char34 Chaves\char34})),{}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}\Conid{Fork}\;(\Conid{Leaf}\;(\text{\tt \char34 P.Ferreira\char34}),\Conid{Leaf}\;(\text{\tt \char34 Benfica\char34})){}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}){}\<[E]%
+\\
+\>[5]{}\hsindent{2}{}\<[7]%
+\>[7]{},\Conid{Fork}\;({}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}\Conid{Fork}\;(\Conid{Leaf}\;(\text{\tt \char34 Porto\char34}),\Conid{Leaf}\;(\text{\tt \char34 Braga\char34})),{}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}\Conid{Fork}\;(\Conid{Leaf}\;(\text{\tt \char34 Setubal\char34}),\Conid{Leaf}\;(\text{\tt \char34 Feirense\char34})){}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}){}\<[E]%
+\\
+\>[5]{}\hsindent{2}{}\<[7]%
+\>[7]{}){}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{},\Conid{Fork}\;({}\<[E]%
+\\
+\>[5]{}\hsindent{2}{}\<[7]%
+\>[7]{}\Conid{Fork}\;({}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}\Conid{Fork}\;(\Conid{Leaf}\;(\text{\tt \char34 Guimaraes\char34}),\Conid{Leaf}\;(\text{\tt \char34 Belenenses\char34})),{}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}\Conid{Fork}\;(\Conid{Leaf}\;(\text{\tt \char34 Moreirense\char34}),\Conid{Leaf}\;(\text{\tt \char34 Maritimo\char34})){}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}){}\<[E]%
+\\
+\>[5]{}\hsindent{2}{}\<[7]%
+\>[7]{},\Conid{Fork}\;({}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}\Conid{Fork}\;(\Conid{Leaf}\;(\text{\tt \char34 Arouca\char34}),\Conid{Leaf}\;(\text{\tt \char34 Estoril\char34})),{}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}\Conid{Fork}\;(\Conid{Leaf}\;(\text{\tt \char34 Rio~Ave\char34}),\Conid{Leaf}\;(\text{\tt \char34 Nacional\char34})){}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}){}\<[E]%
+\\
+\>[5]{}\hsindent{2}{}\<[7]%
+\>[7]{}){}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}){}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
 

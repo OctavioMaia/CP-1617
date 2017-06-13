@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.5.1)  13 JUN 2017 16:36
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.5.1)  13 JUN 2017 18:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1085,25 +1085,28 @@ Overfull \hbox (23.0373pt too wide) in paragraph at lines 1212--1316
 
 \openout5 = `cp1617t.ptb'.
 
- [13] (./cp1617t.ind [14] [15
+ [13]
+\openout5 = `cp1617t.ptb'.
+
+ (./cp1617t.ind [14] [15
 
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1443.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1443.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1536.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1536.
  (./cp1617t.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1443.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1443.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1536.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1536.
 
 Package rerunfilecheck Info: File `cp1617t.out' has not changed.
 (rerunfilecheck)             Checksum: 5DC94B7046BAC0227E6F46C9CCE6DE02;364.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1443.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1536.
  ) 
 Here is how much of TeX's memory you used:
- 10616 strings out of 494447
- 145332 string characters out of 6165748
+ 10621 strings out of 494447
+ 145409 string characters out of 6165748
  300270 words of memory out of 5000000
- 13551 multiletter control sequences out of 15000+600000
+ 13556 multiletter control sequences out of 15000+600000
  40241 words of font info for 123 fonts, out of 8000000 for 9000
  352 hyphenation exceptions out of 8191
  32i,10n,51p,3280b,495s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1127,7 +1130,7 @@ e1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type
 o/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on cp1617t.pdf (15 pages, 421843 bytes).
+Output written on cp1617t.pdf (15 pages, 422796 bytes).
 PDF statistics:
  355 PDF objects out of 1000 (max. 8388607)
  309 compressed objects within 4 object streams
