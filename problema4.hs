@@ -1,6 +1,6 @@
 import Cp
 import Probability hiding (choose)
-import Test.QuickCheck hiding ((×),(><))
+import Test.QuickCheck hiding ((><))
 import LTree
 
 type Algae = A

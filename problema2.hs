@@ -1,5 +1,6 @@
 import Cp
 import List
+import Test.QuickCheck hiding ((><))
 
 wc_w_final :: [Char] -> Int
 wc_w_final = wrapper . worker
@@ -26,3 +27,5 @@ wc_w (c : l) = if not(sep c) && lookahead_sep(l)
 			 else wc_w l
 
 check s = toInteger(wc_w s) == toInteger(wc_w_final s)
+
+test = quickCheck check
