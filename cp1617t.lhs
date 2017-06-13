@@ -782,18 +782,20 @@ mirrorB_treeAux (x,xs) = (p2(last xs), reverse(mirrorAux(x,reverse(uncurry zip((
 
 mirrorAux (x,(a,b):xs) = (a,x):xs
 
+
 lsplitB_tree []    = i1 ()
 lsplitB_tree [h]   = i2 ([],[(h,[])])
 lsplitB_tree (x:y:t) 
-            |x > y     = let (l1,l2,l3) = splitB_tree (uncurry(&&).split(>y)(<x)) (>y) t in i2 (l1,(y,l2):[(x,l3)])
-            |otherwise = let (l1,l2,l3) = splitB_tree (uncurry(&&).split(>x)(<y)) (>x) t in i2 (l1,(x,l2):[(y,l3)])
+            |x > y     = let (l1,l2,l3) = auxB_tree (uncurry(&&).split(>y)(<x)) (>y) t in i2 (l1,(y,l2):[(x,l3)])
+            |otherwise = let (l1,l2,l3) = auxB_tree (uncurry(&&).split(>x)(<y)) (>x) t in i2 (l1,(x,l2):[(y,l3)])
 
-splitB_tree :: (a -> Bool) -> (a -> Bool) -> [a] -> ([a], [a], [a])
-splitB_tree p1 p2 [] = ([], [], [])
-splitB_tree p1 p2 (h:t)  
-            | p1 h      = let (s,m,l) = splitB_tree p1 p2 t in (s,h:m,l)
-            | p2 h      = let (s,m,l) = splitB_tree p1 p2 t in (s,m,h:l) 
-            | otherwise = let (s,m,l) = splitB_tree p1 p2 t in (h:s,m,l)
+
+auxB_tree :: (a -> Bool) -> (a -> Bool) -> [a] -> ([a], [a], [a])
+auxB_tree p1 p2 [] = ([], [], [])
+auxB_tree p1 p2 (h:t)  
+            | p1 h      = let (s,m,l) = auxB_tree p1 p2 t in (s,h:m,l)
+            | p2 h      = let (s,m,l) = auxB_tree p1 p2 t in (s,m,h:l) 
+            | otherwise = let (s,m,l) = auxB_tree p1 p2 t in (h:s,m,l)
 
 qSortB_tree :: Ord a => [a] -> [a]  
 qSortB_tree = hyloB_tree inordB lsplitB_tree 

@@ -1271,27 +1271,27 @@ De modo a implementar o mecanismo de \emph{QuickCheck} foi necessário criar a f
 \\
 \>[B]{}\hsindent{13}{}\<[13]%
 \>[13]{}\mid \Varid{x}\mathbin{>}\Varid{y}{}\<[24]%
-\>[24]{}\mathrel{=}\mathbf{let}\;(\Varid{l1},\Varid{l2},\Varid{l3})\mathrel{=}\Varid{splitB\char95 tree}\;(\uncurry{(\mathrel{\wedge})}\comp \conj{\mathbin{>}\Varid{y}}{\mathbin{<}\Varid{x}})\;(\mathbin{>}\Varid{y})\;\Varid{t}\;\mathbf{in}\;i_2\;(\Varid{l1},(\Varid{y},\Varid{l2})\mathbin{:}[\mskip1.5mu (\Varid{x},\Varid{l3})\mskip1.5mu]){}\<[E]%
+\>[24]{}\mathrel{=}\mathbf{let}\;(\Varid{l1},\Varid{l2},\Varid{l3})\mathrel{=}\Varid{auxB\char95 tree}\;(\uncurry{(\mathrel{\wedge})}\comp \conj{\mathbin{>}\Varid{y}}{\mathbin{<}\Varid{x}})\;(\mathbin{>}\Varid{y})\;\Varid{t}\;\mathbf{in}\;i_2\;(\Varid{l1},(\Varid{y},\Varid{l2})\mathbin{:}[\mskip1.5mu (\Varid{x},\Varid{l3})\mskip1.5mu]){}\<[E]%
 \\
 \>[B]{}\hsindent{13}{}\<[13]%
-\>[13]{}\mid \Varid{otherwise}\mathrel{=}\mathbf{let}\;(\Varid{l1},\Varid{l2},\Varid{l3})\mathrel{=}\Varid{splitB\char95 tree}\;(\uncurry{(\mathrel{\wedge})}\comp \conj{\mathbin{>}\Varid{x}}{\mathbin{<}\Varid{y}})\;(\mathbin{>}\Varid{x})\;\Varid{t}\;\mathbf{in}\;i_2\;(\Varid{l1},(\Varid{x},\Varid{l2})\mathbin{:}[\mskip1.5mu (\Varid{y},\Varid{l3})\mskip1.5mu]){}\<[E]%
+\>[13]{}\mid \Varid{otherwise}\mathrel{=}\mathbf{let}\;(\Varid{l1},\Varid{l2},\Varid{l3})\mathrel{=}\Varid{auxB\char95 tree}\;(\uncurry{(\mathrel{\wedge})}\comp \conj{\mathbin{>}\Varid{x}}{\mathbin{<}\Varid{y}})\;(\mathbin{>}\Varid{x})\;\Varid{t}\;\mathbf{in}\;i_2\;(\Varid{l1},(\Varid{x},\Varid{l2})\mathbin{:}[\mskip1.5mu (\Varid{y},\Varid{l3})\mskip1.5mu]){}\<[E]%
 \\[\blanklineskip]%
-\>[B]{}\Varid{splitB\char95 tree}\mathbin{::}(\Varid{a}\to \Conid{Bool})\to (\Varid{a}\to \Conid{Bool})\to [\mskip1.5mu \Varid{a}\mskip1.5mu]\to ([\mskip1.5mu \Varid{a}\mskip1.5mu],[\mskip1.5mu \Varid{a}\mskip1.5mu],[\mskip1.5mu \Varid{a}\mskip1.5mu]){}\<[E]%
+\>[B]{}\Varid{auxB\char95 tree}\mathbin{::}(\Varid{a}\to \Conid{Bool})\to (\Varid{a}\to \Conid{Bool})\to [\mskip1.5mu \Varid{a}\mskip1.5mu]\to ([\mskip1.5mu \Varid{a}\mskip1.5mu],[\mskip1.5mu \Varid{a}\mskip1.5mu],[\mskip1.5mu \Varid{a}\mskip1.5mu]){}\<[E]%
 \\
-\>[B]{}\Varid{splitB\char95 tree}\;\p1\;\p2\;[\mskip1.5mu \mskip1.5mu]\mathrel{=}([\mskip1.5mu \mskip1.5mu],[\mskip1.5mu \mskip1.5mu],[\mskip1.5mu \mskip1.5mu]){}\<[E]%
+\>[B]{}\Varid{auxB\char95 tree}\;\p1\;\p2\;[\mskip1.5mu \mskip1.5mu]\mathrel{=}([\mskip1.5mu \mskip1.5mu],[\mskip1.5mu \mskip1.5mu],[\mskip1.5mu \mskip1.5mu]){}\<[E]%
 \\
-\>[B]{}\Varid{splitB\char95 tree}\;\p1\;\p2\;(\Varid{h}\mathbin{:}\Varid{t}){}\<[E]%
+\>[B]{}\Varid{auxB\char95 tree}\;\p1\;\p2\;(\Varid{h}\mathbin{:}\Varid{t}){}\<[E]%
 \\
 \>[B]{}\hsindent{13}{}\<[13]%
 \>[13]{}\mid \p1\;\Varid{h}{}\<[25]%
-\>[25]{}\mathrel{=}\mathbf{let}\;(\Varid{s},\Varid{m},\Varid{l})\mathrel{=}\Varid{splitB\char95 tree}\;\p1\;\p2\;\Varid{t}\;\mathbf{in}\;(\Varid{s},\Varid{h}\mathbin{:}\Varid{m},\Varid{l}){}\<[E]%
+\>[25]{}\mathrel{=}\mathbf{let}\;(\Varid{s},\Varid{m},\Varid{l})\mathrel{=}\Varid{auxB\char95 tree}\;\p1\;\p2\;\Varid{t}\;\mathbf{in}\;(\Varid{s},\Varid{h}\mathbin{:}\Varid{m},\Varid{l}){}\<[E]%
 \\
 \>[B]{}\hsindent{13}{}\<[13]%
 \>[13]{}\mid \p2\;\Varid{h}{}\<[25]%
-\>[25]{}\mathrel{=}\mathbf{let}\;(\Varid{s},\Varid{m},\Varid{l})\mathrel{=}\Varid{splitB\char95 tree}\;\p1\;\p2\;\Varid{t}\;\mathbf{in}\;(\Varid{s},\Varid{m},\Varid{h}\mathbin{:}\Varid{l}){}\<[E]%
+\>[25]{}\mathrel{=}\mathbf{let}\;(\Varid{s},\Varid{m},\Varid{l})\mathrel{=}\Varid{auxB\char95 tree}\;\p1\;\p2\;\Varid{t}\;\mathbf{in}\;(\Varid{s},\Varid{m},\Varid{h}\mathbin{:}\Varid{l}){}\<[E]%
 \\
 \>[B]{}\hsindent{13}{}\<[13]%
-\>[13]{}\mid \Varid{otherwise}\mathrel{=}\mathbf{let}\;(\Varid{s},\Varid{m},\Varid{l})\mathrel{=}\Varid{splitB\char95 tree}\;\p1\;\p2\;\Varid{t}\;\mathbf{in}\;(\Varid{h}\mathbin{:}\Varid{s},\Varid{m},\Varid{l}){}\<[E]%
+\>[13]{}\mid \Varid{otherwise}\mathrel{=}\mathbf{let}\;(\Varid{s},\Varid{m},\Varid{l})\mathrel{=}\Varid{auxB\char95 tree}\;\p1\;\p2\;\Varid{t}\;\mathbf{in}\;(\Varid{h}\mathbin{:}\Varid{s},\Varid{m},\Varid{l}){}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{qSortB\char95 tree}\mathbin{::}\Conid{Ord}\;\Varid{a}\Rightarrow [\mskip1.5mu \Varid{a}\mskip1.5mu]\to [\mskip1.5mu \Varid{a}\mskip1.5mu]{}\<[E]%
 \\
