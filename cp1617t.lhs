@@ -85,13 +85,13 @@
 
 \begin{center}\large
 \begin{tabular}{ll}
-\textbf{Grupo} nr. & 99 (preencher)
+\textbf{Grupo} nr. & 51
 \\\hline
-a11111 & Nome1 (preencher)	
+a70922 & Francisco Sampaio da Costa
 \\
-a22222 & Nome2 (preencher)	
+a71489 & João Luís Martins Areal Vieira
 \\
-a33333 & Nome3 (preencher)	
+a71369 & Octávio José Azevedo Maia	
 \end{tabular}
 \end{center}
 
@@ -712,7 +712,12 @@ outras funções auxiliares que sejam necessárias.
 
 \begin{code}
 inv x = p1 . for (split (uncurry(+)) (((1-x)*).p2)) (1,1-x)
+\end{code}
 
+De modo a implementar o mecanismo de \emph{QuickCheck} foi necessário gerar um \textbf{Double} entre \emph{1.0} e \emph{2.0}. Para este efeito utilizamos a propriedade \emph{Gen} da biblioteca \emph{QuickCheck}.
+\\Após isto, foi criada a função \textbf{testProb1}, responsável por chamar a função \emph{quickCheck} para todos os elementos gerados pelo \emph{genDouble}. Esta função recebe como parâmetro um inteiro \textbf{n} responsável pelo número de iterações a realizar.
+
+\begin{code}
 genDouble :: Gen(Double)
 genDouble = Test.QuickCheck.choose (1.0,2.0)
 
@@ -731,7 +736,12 @@ worker = cataList $ either a b
            a = split (true)   (const 0)
            b = split (sep.p1) (cond ((uncurry(&&)).(not.sep><p1)) (succ.p2.p2) (p2.p2))
            sep c =  c == ' ' || c == '\n'  || c == '\t'
+\end{code}
 
+De modo a implementar o mecanismo de \emph{QuickCheck} foi necessário criar a função \textbf{check} que compara o resultado da função \emph{wc\_w} (fornecida pelo professor) e a função \emph{wc\_w\_final} criada por nós.
+\\A função \emph{check} recebe uma string como argumento, mas o \emph{QuickCheck} tem a capacidade de gerar uma string aleatória, removendo assim a necessidade de passar um argumento.
+
+\begin{code}
 check s = toInteger(wc_w s) == toInteger(wc_w_final s)
 
 testProb2 = quickCheck check
@@ -816,7 +826,19 @@ showAlgae = cataA l r
       where 
         l = either(const"A")(conc)
         r = either(const"B")(id) 
+\end{code}
 
+De modo a implementar o mecanismo de \emph{QuickCheck} foi necessário gerar um \textbf{Int}. Para este efeito utilizamos a propriedade \emph{Gen} da biblioteca \emph{QuickCheck}, na qual decidimos restringir o valor do mesmo entre 0 e 10, de modo a evitar representações de \emph{Algaes} com demasiados nodos.
+\\No enunciado é pedido para verificar a seguinte propriedade: 
+
+\begin{quote}
+  |length . showAlgae . generateAlgae = fib . succ|
+\end{quote}
+
+Assim sendo, calculamos o comprimento da \emph{Algae} gerada aleatoriamente pelo nosso \emph{QuickCheck} e comparamos com o sucessor da série de Fibonacci.
+Caso ambos os valores sejam iguais passa no teste do \emph{QuickCheck}, iterando para o resto dos valores gerados aleatoriamente.
+
+\begin{code}
 genInt :: Gen(Int)
 genInt = Test.QuickCheck.choose (0,10)
 

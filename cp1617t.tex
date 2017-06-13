@@ -296,13 +296,13 @@
 
 \begin{center}\large
 \begin{tabular}{ll}
-\textbf{Grupo} nr. & 99 (preencher)
+\textbf{Grupo} nr. & 51
 \\\hline
-a11111 & Nome1 (preencher)	
+a70922 & Francisco Sampaio da Costa
 \\
-a22222 & Nome2 (preencher)	
+a71489 & João Luís Martins Areal Vieira
 \\
-a33333 & Nome3 (preencher)	
+a71369 & Octávio José Azevedo Maia	
 \end{tabular}
 \end{center}
 
@@ -1138,10 +1138,18 @@ outras funções auxiliares que sejam necessárias.
 
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{13}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{inv}\;\Varid{x}\mathrel{=}\p1\comp \mathsf{for}\ \conj{\uncurry{(\mathbin{+})}}{((\mathrm{1}\mathbin{-}\Varid{x})\mathbin{*})\comp \p2}\ (\mathrm{1},\mathrm{1}\mathbin{-}\Varid{x}){}\<[E]%
-\\[\blanklineskip]%
+\ColumnHook
+\end{hscode}\resethooks
+
+De modo a implementar o mecanismo de \emph{QuickCheck} foi necessário gerar um \textbf{Double} entre \emph{1.0} e \emph{2.0}. Para este efeito utilizamos a propriedade \emph{Gen} da biblioteca \emph{QuickCheck}.
+\\Após isto, foi criada a função \textbf{testProb1}, responsável por chamar a função \emph{quickCheck} para todos os elementos gerados pelo \emph{genDouble}. Esta função recebe como parâmetro um inteiro \textbf{n} responsável pelo número de iterações a realizar.
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{13}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{genDouble}\mathbin{::}\Conid{Gen}\;(\Conid{Double}){}\<[E]%
 \\
 \>[B]{}\Varid{genDouble}\mathrel{=}\Varid{\Conid{Test}.\Conid{QuickCheck}.choose}\;(\mathrm{1.0},\mathrm{2.0}){}\<[E]%
@@ -1184,7 +1192,15 @@ outras funções auxiliares que sejam necessárias.
 \>[12]{}\Varid{sep}\;\Varid{c}\mathrel{=}{}\<[21]%
 \>[21]{}\Varid{c}\equiv \text{\tt '~'}\mathrel{\vee}\Varid{c}\equiv \text{\tt '\char92 n'}{}\<[44]%
 \>[44]{}\mathrel{\vee}\Varid{c}\equiv \text{\tt '\char92 t'}{}\<[E]%
-\\[\blanklineskip]%
+\ColumnHook
+\end{hscode}\resethooks
+
+De modo a implementar o mecanismo de \emph{QuickCheck} foi necessário criar a função \textbf{check} que compara o resultado da função \emph{wc\_w} (fornecida pelo professor) e a função \emph{wc\_w\_final} criada por nós.
+\\A função \emph{check} recebe uma string como argumento, mas o \emph{QuickCheck} tem a capacidade de gerar uma string aleatória, removendo assim a necessidade de passar um argumento.
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{check}\;\Varid{s}\mathrel{=}\Varid{toInteger}\;(\Varid{wc\char95 w}\;\Varid{s})\equiv \Varid{toInteger}\;(\Varid{wc\char95 w\char95 final}\;\Varid{s}){}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{testProb2}\mathrel{=}\Varid{quickCheck}\;\Varid{check}{}\<[E]%
@@ -1312,7 +1328,6 @@ outras funções auxiliares que sejam necessárias.
 
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{7}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{9}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
@@ -1336,7 +1351,24 @@ outras funções auxiliares que sejam necessárias.
 \\
 \>[7]{}\hsindent{2}{}\<[9]%
 \>[9]{}\Varid{r}\mathrel{=}\alt{\underline{\text{\tt \char34 B\char34}}}{\Varid{id}}{}\<[E]%
-\\[\blanklineskip]%
+\ColumnHook
+\end{hscode}\resethooks
+
+De modo a implementar o mecanismo de \emph{QuickCheck} foi necessário gerar um \textbf{Int}. Para este efeito utilizamos a propriedade \emph{Gen} da biblioteca \emph{QuickCheck}, na qual decidimos restringir o valor do mesmo entre 0 e 10, de modo a evitar representações de \emph{Algaes} com demasiados nodos.
+\\No enunciado é pedido para verificar a seguinte propriedade: 
+
+\begin{quote}
+  \ensuremath{\length \comp \Varid{showAlgae}\comp \Varid{generateAlgae}\mathrel{=}\Varid{fib}\comp \succ }
+\end{quote}
+
+Assim sendo, calculamos o comprimento da \emph{Algae} gerada aleatoriamente pelo nosso \emph{QuickCheck} e comparamos com o sucessor da série de Fibonacci.
+Caso ambos os valores sejam iguais passa no teste do \emph{QuickCheck}, iterando para o resto dos valores gerados aleatoriamente.
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{9}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{genInt}\mathbin{::}\Conid{Gen}\;(\Conid{Int}){}\<[E]%
 \\
 \>[B]{}\Varid{genInt}\mathrel{=}\Varid{\Conid{Test}.\Conid{QuickCheck}.choose}\;(\mathrm{0},\mathrm{10}){}\<[E]%
