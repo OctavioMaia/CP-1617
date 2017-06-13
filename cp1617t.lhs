@@ -711,65 +711,133 @@ outras funções auxiliares que sejam necessárias.
 \subsection*{Problema 1}
 
 \begin{code}
-inv x = undefined
+inv x = p1 . for (split (uncurry(+)) (((1-x)*).p2)) (1,1-x)
+
+genDouble :: Gen(Double)
+genDouble = Test.QuickCheck.choose (1.0,2.0)
+
+testProb1 n = quickCheck $ forAll genDouble check
+            where check = \x -> (abs ((1/x)-(inv x n+1))) > abs ((1/x)-(inv x n))
 \end{code}
 
 \subsection*{Problema 2}
 \begin{code}
 wc_w_final :: [Char] -> Int
 wc_w_final = wrapper . worker
-wrapper = undefined
-worker = undefined
+wrapper = p2
+
+worker = cataList $ either a b
+     where 
+           a = split (true)   (const 0)
+           b = split (sep.p1) (cond ((uncurry(&&)).(not.sep><p1)) (succ.p2.p2) (p2.p2))
+           sep c =  c == ' ' || c == '\n'  || c == '\t'
+
+check s = toInteger(wc_w s) == toInteger(wc_w_final s)
+
+testProb2 = quickCheck check
 \end{code}
 
 \subsection*{Problema 3}
 
 \begin{code}
-inB_tree = undefined
-outB_tree = undefined
+inB_tree = either (const Nil) (uncurry Block)
 
-recB_tree f = undefined
-baseB_tree g f = undefined
-cataB_tree g = undefined
-anaB_tree g = undefined
-hyloB_tree f g = undefined
+outB_tree Nil = i1 ()
+outB_tree (Block a b) = i2 (a,b)
+
+recB_tree f = baseB_tree id f
+
+baseB_tree g f = id -|- (f >< (map (g >< f)))
+
+cataB_tree g = g . (recB_tree (cataB_tree g)) . outB_tree
+
+anaB_tree g = inB_tree . (recB_tree (anaB_tree g)) . g
+
+hyloB_tree f g = cataB_tree f . anaB_tree g
 
 instance Functor B_tree
-         where fmap f = undefined
+  where fmap f = cataB_tree ( inB_tree . baseB_tree f id)
 
-inordB_tree = undefined
+inordB_tree = cataB_tree inordB
 
-largestBlock = undefined
+inordB = either nil join
+    where join = conc.(id><(foldr(++) []).(map cons)) 
 
-mirrorB_tree = undefined
+largestBlock = cataB_tree largestBlockAux
+largestBlockAux = either (const 0) largest
+  where largest (x,xs) = max x (max (length xs) (maximum(p2(unzip xs))))
 
-lsplitB_tree = undefined
+mirrorB_tree = anaB_tree ((id -|- mirrorB_treeAux) . outB_tree)
+mirrorB_treeAux (x,xs) = (p2(last xs), reverse(mirrorAux(x,reverse(uncurry zip((reverse><id)(unzip xs))))))
 
-qSortB_tree = undefined
+mirrorAux (x,(a,b):xs) = (a,x):xs
 
-dotB_tree = undefined
+lsplitB_tree []    = i1 ()
+lsplitB_tree [h]   = i2 ([],[(h,[])])
+lsplitB_tree (x:y:t) 
+            |x > y     = let (l1,l2,l3) = splitB_tree (uncurry(&&).split(>y)(<x)) (>y) t in i2 (l1,(y,l2):[(x,l3)])
+            |otherwise = let (l1,l2,l3) = splitB_tree (uncurry(&&).split(>x)(<y)) (>x) t in i2 (l1,(x,l2):[(y,l3)])
 
-cB_tree2Exp = undefined
+splitB_tree :: (a -> Bool) -> (a -> Bool) -> [a] -> ([a], [a], [a])
+splitB_tree p1 p2 [] = ([], [], [])
+splitB_tree p1 p2 (h:t)  
+            | p1 h      = let (s,m,l) = splitB_tree p1 p2 t in (s,h:m,l)
+            | p2 h      = let (s,m,l) = splitB_tree p1 p2 t in (s,m,h:l) 
+            | otherwise = let (s,m,l) = splitB_tree p1 p2 t in (h:s,m,l)
+
+qSortB_tree :: Ord a => [a] -> [a]  
+qSortB_tree = hyloB_tree inordB lsplitB_tree 
+
+dotB_tree :: Show a => B_tree a -> IO ExitCode
+dotB_tree = dotpict . bmap nothing (Just . show) . cB_tree2Exp
+
+cB_tree2Exp = cataB_tree $ either nul rest
+  where 
+        nul  = const (Var "nil")
+        rest = (uncurry Term) . split ((map p1) . p2) (cons . (split (p1) ((map p2).p2)))
 \end{code}
 
 \subsection*{Problema 4}
 
 \begin{code}
-anaA = undefined
+anaA ga gb = inA . (id -|- anaA ga gb >< anaB ga gb) . ga
 
-anaB = undefined
+anaB ga gb = inB . (id -|- anaA ga gb) . gb
 \end{code}
 
 \begin{code}
-generateAlgae = undefined 
+generateAlgae = anaA ga gb
+ga 0 = i1 ()
+ga n = i2 (n-1,n-1)
+gb 0 = i1 ()
+gb n = i2 (n-1)
 
-showAlgae = undefined
+showAlgae = cataA l r
+      where 
+        l = either(const"A")(conc)
+        r = either(const"B")(id) 
+
+genInt :: Gen(Int)
+genInt = Test.QuickCheck.choose (0,10)
+
+checkAlgae n = a == f
+    where 
+        a = toInteger $ length(showAlgae(generateAlgae n))
+        f = fib $ toInteger(succ n)
+
+testProb4 = quickCheck $ forAll genInt checkAlgae
 \end{code}
 
 \subsection*{Problema 5}
 
 \begin{code}
-permuta = undefined
+permuta [] = return []
+permuta l = do { 
+          (h,t) <- getR l ; 
+          x <- permuta t; 
+          return (h:x)
+          }
+
 
 eliminatoria = undefined
 \end{code}
